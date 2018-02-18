@@ -1,0 +1,24 @@
+
+title: wintermute
+description: We are out where the little waves are too broad, we cannot see the rock that hit the center. We know something is there, but not why. I wanna know why.
+
+baseurl: ""
+url: ""
+
+collections:
+- paths
+
+# Build settings
+markdown: kramdown
+theme: 
+plugins:
+  - jekyll-feed
+
+exclude:
+   - Gemfile
+   - Gemfile.lock
+   - node_modules
+   - vendor/bundle/
+   - vendor/cache/
+   - vendor/gems/
+   - vendor/ruby/

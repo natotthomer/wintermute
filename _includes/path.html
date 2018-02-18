@@ -1,0 +1,15 @@
+{% for path in site.paths %}
+    <section id="{{ path.command }}" target="_blank">
+        <div class="message">{{ path.message }}</div>
+        <div class="content">
+            <p>{{ path.content | markdownify }}</p>
+        </div>
+        <div class="guides">
+            {% for guide in path.guides %}
+                <div class="guide">
+                    // '{{ guide.name }}' + <kbd>enter</kbd> -- {{ guide.label }}
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endfor %}
