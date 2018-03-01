@@ -100,10 +100,6 @@ input[type="text"]:focus{
     outline:none;
 }
 
-section {
-    display: none;
-}
-
 .open {
     display: block;
 }
