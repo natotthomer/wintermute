@@ -1,4 +1,4 @@
-*, *:before, *:after {
+  *, *:before, *:after {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -6,8 +6,8 @@
 
 html,body {
     background: black;
-    overflow-y: scroll; 
-    font-family: 'Anonymous Pro', monospace; 
+    overflow-y: scroll;
+    font-family: 'Anonymous Pro', monospace;
 }
 
 body {
