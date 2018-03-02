@@ -6,7 +6,7 @@ module.exports = {
   context: __dirname,
   entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'src', 'dist'),
     filename: 'bundle.js'
   },
   module: {
@@ -31,9 +31,5 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin('bundle.css')
   ],
-  devtool: 'source-map',
-  devServer: {
-    contentBase: path.resolve(__dirname),
-    port: 9000
-  }
+  devtool: 'source-map'
 }

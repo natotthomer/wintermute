@@ -25,6 +25,8 @@ export default class App extends React.Component {
     e.preventDefault()
     if (Object.keys(commands).includes(this.state.prompt)) {
       this.setState({ command: commands[this.state.prompt] })
+    } else {
+      this.setState({ command: commands['error'] })
     }
 
     this.setState({ prompt: '' })
@@ -43,33 +45,34 @@ export default class App extends React.Component {
 
       return (
         <section>
-          <Typist avgTypingDelay={1} cursor={{ show: false }} stdTypingDelay={1}>
-            <div className='message'>{message}</div>
-            <div className='content'>
-              {splitContent.map((newLine, idx) => {
-                return (
-                  <p key={idx}>
-                    {newLine}
-                  </p>
-                )
-              })}
-            </div>
-            <div className='guides'>
-              {guides.map((guide, idx) => {
-                return (
-                  <div className='guide' key={idx}>
-                    // '{ guide.name }' + <kbd>enter</kbd> -- { guide.label }
-                  </div>
-                )
-              })}
-            </div>
-          </Typist>
+          <div className='message'>{message}</div>
+          <div className='content'>
+            {splitContent.map((newLine, idx) => {
+              return (
+                <p key={idx}>
+                  {newLine}
+                </p>
+              )
+            })}
+          </div>
+          <div className='guides'>
+            {guides.map((guide, idx) => {
+              return (
+                <div className='guide' key={idx}>
+                  // '{ guide.name }' + <kbd>enter</kbd> -- { guide.label }
+                </div>
+              )
+            })}
+          </div>
         </section>
       )
     } else {
       return <section />
     }
   }
+  // <Typist avgTypingDelay={1} cursor={{ show: false }} stdTypingDelay={1}>
+  //
+  // </Typist>
 
   render () {
     return (
