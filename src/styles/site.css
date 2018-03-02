@@ -46,6 +46,11 @@ p {
 
 .content {
     margin: 3em 0;
+
+}
+
+.content > p {
+  margin: 0;
 }
 
 .guides {

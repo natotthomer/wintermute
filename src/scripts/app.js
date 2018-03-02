@@ -1,4 +1,5 @@
 import React from 'react'
+import Typist from 'react-typist'
 
 import commands from '../../commands.json'
 
@@ -17,7 +18,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount () {
-    this.setState({ command: commands.begin })
+    this.setState({ command: commands.end })
   }
 
   handleSubmit (e) {
@@ -37,19 +38,32 @@ export default class App extends React.Component {
   renderContent () {
     if (Object.keys(this.state.command).length > 0) {
       const { message, content, guides } = this.state.command
+
+      const splitContent = content.split('\n')
+
       return (
         <section>
-          <div className='message'>{message}</div>
-          <div className='content'>{content}</div>
-          <div className='guides'>
-            {guides.map((guide, idx) => {
-              return (
-                <div className='guide' key={idx}>
+          <Typist avgTypingDelay={1} cursor={{ show: false }} stdTypingDelay={1}>
+            <div className='message'>{message}</div>
+            <div className='content'>
+              {splitContent.map((newLine, idx) => {
+                return (
+                  <p key={idx}>
+                    {newLine}
+                  </p>
+                )
+              })}
+            </div>
+            <div className='guides'>
+              {guides.map((guide, idx) => {
+                return (
+                  <div className='guide' key={idx}>
                     // '{ guide.name }' + <kbd>enter</kbd> -- { guide.label }
-                </div>
-              )
-            })}
-          </div>
+                  </div>
+                )
+              })}
+            </div>
+          </Typist>
         </section>
       )
     } else {
