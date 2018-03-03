@@ -1,6 +1,6 @@
 import React from 'react'
-import Typist from 'react-typist'
 
+import CliOutput from './cli-output.js'
 import commands from '../../commands.json'
 
 export default class App extends React.Component {
@@ -14,10 +14,10 @@ export default class App extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handlePromptChange = this.handlePromptChange.bind(this)
-    this.renderContent = this.renderContent.bind(this)
   }
 
   componentDidMount () {
+    this.input.focus()
     this.setState({ command: commands.end })
   }
 
@@ -37,43 +37,6 @@ export default class App extends React.Component {
     this.setState({ prompt: e.target.value })
   }
 
-  renderContent () {
-    if (Object.keys(this.state.command).length > 0) {
-      const { message, content, guides } = this.state.command
-
-      const splitContent = content.split('\n')
-
-      return (
-        <section>
-          <div className='message'>{message}</div>
-          <div className='content'>
-            {splitContent.map((newLine, idx) => {
-              return (
-                <p key={idx}>
-                  {newLine}
-                </p>
-              )
-            })}
-          </div>
-          <div className='guides'>
-            {guides.map((guide, idx) => {
-              return (
-                <div className='guide' key={idx}>
-                  // '{ guide.name }' + <kbd>enter</kbd> -- { guide.label }
-                </div>
-              )
-            })}
-          </div>
-        </section>
-      )
-    } else {
-      return <section />
-    }
-  }
-  // <Typist avgTypingDelay={1} cursor={{ show: false }} stdTypingDelay={1}>
-  //
-  // </Typist>
-
   render () {
     return (
       <div className='app-container'>
@@ -81,11 +44,16 @@ export default class App extends React.Component {
           <div className='command'>
             <form onSubmit={this.handleSubmit}>
               <label htmlFor='command'>wintermute //</label>
-              <input type='text' id='command' onChange={this.handlePromptChange} value={this.state.prompt} />
+              <input
+                ref={input => { this.input = input }}
+                type='text'
+                id='command'
+                onChange={this.handlePromptChange}
+                value={this.state.prompt} />
               <input type='submit' style={{ display: 'none' }} />
             </form>
           </div>
-          {this.renderContent()}
+          <CliOutput command={this.state.command} />
         </div>
       </div>
     )
