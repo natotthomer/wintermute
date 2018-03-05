@@ -5,7 +5,9 @@ A thing.
 ## Getting Started
 
 Clone the repository and then
+
 ```
+cd wintermute
 brew update
 npm install
 npm run dev
