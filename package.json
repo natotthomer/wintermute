@@ -2,9 +2,13 @@
   "name": "wintermute",
   "version": "1.0.0",
   "description": "A browser client for WNTRMUTE",
-  "main": "/src/index.js",
+  "main": "webpack.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "webpack-watch": "webpack -d --watch",
+    "express-server": "nodemon server",
+    "dev": "concurrent --kill-others \"npm run webpack-watch\" \"npm run express-server\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server"
   },
   "repository": {
     "type": "git",

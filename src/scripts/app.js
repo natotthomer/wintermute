@@ -22,6 +22,7 @@ export default class App extends React.Component {
     this.input.focus()
     fetch('/api/commands')
       .then(response => {
+        console.log(response);
         return response.json()
       })
       .then(commands => {
@@ -48,6 +49,7 @@ export default class App extends React.Component {
 
   render () {
     // add onBlur to never lose focus
+    console.log('hi');
     return (
       <div className='app-container'>
         <div className='cli'>
@@ -59,6 +61,7 @@ export default class App extends React.Component {
                 type='text'
                 id='command'
                 onChange={this.handlePromptChange}
+                onBlur={() => this.input.focus()}
                 value={this.state.prompt} />
               <input type='submit' style={{ display: 'none' }} />
             </form>

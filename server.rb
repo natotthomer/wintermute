@@ -9,7 +9,7 @@ class Server < Sinatra::Base
   file = File.read('commands.json')
 
   get '/commands' do
-    puts 'hello'
+    puts 'commands'
     JSON file
   end
 end
