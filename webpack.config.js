@@ -4,7 +4,10 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 module.exports = {
   mode: 'development',
   context: __dirname,
-  entry: './src/index.js',
+  entry: [
+    'webpack-dev-server/client?http://0.0.0.0:8081',
+    './src/index.js'
+  ],
   output: {
     path: path.resolve(__dirname, 'src', 'dist'),
     filename: 'bundle.js'

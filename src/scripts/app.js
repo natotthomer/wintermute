@@ -1,7 +1,7 @@
 import React from 'react'
 
 import CliOutput from './cli-output.js'
-import commands from '../../commands.json'
+// import commands from '../../commands.json'
 
 export default class App extends React.Component {
   constructor (props) {
@@ -12,21 +12,30 @@ export default class App extends React.Component {
       command: {}
     }
 
+    this.commands = undefined
+
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handlePromptChange = this.handlePromptChange.bind(this)
   }
 
   componentDidMount () {
     this.input.focus()
-    this.setState({ command: commands.end })
+    fetch('/api/commands')
+      .then(response => {
+        return response.json()
+      })
+      .then(commands => {
+        this.commands = commands
+        this.setState({ command: commands.end })
+      })
   }
 
   handleSubmit (e) {
     e.preventDefault()
-    if (Object.keys(commands).includes(this.state.prompt)) {
-      this.setState({ command: commands[this.state.prompt] })
+    if (Object.keys(this.commands).includes(this.state.prompt)) {
+      this.setState({ command: this.commands[this.state.prompt] })
     } else {
-      this.setState({ command: commands['error'] })
+      this.setState({ command: this.commands['error'] })
     }
 
     this.setState({ prompt: '' })
@@ -38,6 +47,7 @@ export default class App extends React.Component {
   }
 
   render () {
+    // add onBlur to never lose focus
     return (
       <div className='app-container'>
         <div className='cli'>
