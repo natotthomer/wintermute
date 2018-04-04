@@ -47,11 +47,16 @@ export default class App extends React.Component {
     this.setState({ prompt: e.target.value })
   }
 
+  handleOnBlur (e) {
+    e.preventDefault()
+    this.input.focus()
+  }
+
   render () {
-    // add onBlur to never lose focus
     return (
       <div className='app-container'>
         <div className='cli'>
+          <CliOutput command={this.state.command} />
           <div className='command'>
             <form onSubmit={this.handleSubmit}>
               <label htmlFor='command'>wintermute //</label>
@@ -62,10 +67,9 @@ export default class App extends React.Component {
                 onChange={this.handlePromptChange}
                 onBlur={() => this.input.focus()}
                 value={this.state.prompt} />
-              <input type='submit' style={{ display: 'none' }} />
+              <input type='submit' onBlur={this.handleOnBlur} style={{ display: 'none' }} />
             </form>
           </div>
-          <CliOutput command={this.state.command} />
         </div>
       </div>
     )
