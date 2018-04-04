@@ -1,52 +1,61 @@
-  *, *:before, *:after {
+*, *:before, *:after {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  }
+}
 
 html,body {
-    background: black;
-    overflow-y: scroll;
-    font-family: 'Anonymous Pro', monospace;
+  background: black;
+  overflow-y: scroll;
+  font-family: 'Anonymous Pro', monospace;
 }
 
 body {
-    color: #999;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-touch-callout: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+  height: 100vh;
+  color: #999;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#root {
+  height: 100%;
+}
+
+.app-container {
+  height: 100%;
 }
 
 .cli {
-    padding: 1em;
+  height: 100%;
+  padding: 1em;
 }
 
 a {
-    color: white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
 a:hover,a:focus{
-    background: #00ff00;
-    color: black;
+  background: #00ff00;
+  color: black;
 }
 
 p {
-    color: #00ff00;
-    line-height: 1.6em;
+  color: #00ff00;
+  line-height: 1.6em;
 }
 
 .message {
-    margin: 1.5em 0;
+  margin: 1.5em 0;
 }
 
 .content {
-    margin: 3em 0;
-
+  margin: 3em 0;
 }
 
 .content > p {
@@ -54,57 +63,62 @@ p {
 }
 
 .guides {
-    margin: 1.5em 0;
+  margin: 1.5em 0;
 }
 
 .guide {
-    font-size: 1em;
-    margin-bottom: 1.5em;
-    font-weight: 400;
-    display: block;
-    color:#999;
-    line-height:1;
+  font-size: 1em;
+  margin-bottom: 1.5em;
+  font-weight: 400;
+  display: block;
+  color:#999;
+  line-height:1;
 }
 
 ul {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 li {
-    margin: 1em 0 0;
+  margin: 1em 0 0;
 }
 
 kbd {
-    background-color: transparent;
-    color: #999;
-    border:1px solid #999;
-    letter-spacing: .075em;
-    text-transform: uppercase;
-    padding: .3em .5em;
-    font-weight: 300;
+  background-color: transparent;
+  color: #999;
+  border:1px solid #999;
+  letter-spacing: .075em;
+  text-transform: uppercase;
+  padding: .3em .5em;
+  font-weight: 300;
 }
 
 .command {
-    display: inline-block;
-    color: white;
-    font-weight: 700;
-    margin: .5em 0;
+  display: inline-block;
+  color: white;
+  font-weight: 700;
+  margin: .5em 0;
 }
 
 input[type="text"] {
-    border: none;
-    font-family: inherit;
-    background: transparent;
-    padding:0 .5em;
+  border: none;
+  font-family: inherit;
+  background: transparent;
+  padding:0 .5em;
 }
 
 input[type="text"]:focus{
-    background: transparent;
-    color: white;
-    outline:none;
+  background: transparent;
+  color: white;
+  outline:none;
 }
 
 .open {
-    display: block;
+  display: block;
+}
+
+section {
+  height: 80%;
+  overflow: scroll;
 }
