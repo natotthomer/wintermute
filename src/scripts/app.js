@@ -22,13 +22,13 @@ export default class App extends React.Component {
     this.input.focus()
     fetch('/api/commands')
       .then(response => {
-        console.log(response);
         return response.json()
       })
       .then(commands => {
         this.commands = commands
         this.setState({ command: commands.end })
       })
+      .catch(error => console.error(error))
   }
 
   handleSubmit (e) {
@@ -49,7 +49,6 @@ export default class App extends React.Component {
 
   render () {
     // add onBlur to never lose focus
-    console.log('hi');
     return (
       <div className='app-container'>
         <div className='cli'>
