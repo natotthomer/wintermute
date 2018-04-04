@@ -9,7 +9,4 @@ class AppProxy < Rack::Proxy
   end
 end
 
-run Rack::URLMap.new(
-    '/api' => Server,
-    '/' => AppProxy.new
-)
+run Server
