@@ -14,7 +14,7 @@ const CliOutput = (props) => {
           <div className='content'>
             {splitContent.map((newLine, idx) => {
               return (
-                <p key={Math.random() + idx}>
+                <p key={Math.random() + '-content-' + idx}>
                   {newLine}
                 </p>
               )
@@ -23,7 +23,7 @@ const CliOutput = (props) => {
           <div className='guides'>
             {guides.map((guide, idx) => {
               return (
-                <div className='guide' key={idx}>
+                <div className='guide' key={Math.random() + '-guides-' + idx}>
                   // '{ guide.name }' + <kbd>enter</kbd> -- { guide.label }
                 </div>
               )
