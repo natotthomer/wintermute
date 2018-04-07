@@ -14,7 +14,7 @@ const CliOutput = (props) => {
           <div className='content'>
             {splitContent.map((newLine, idx) => {
               return (
-                <p key={idx}>
+                <p key={Math.random() + idx}>
                   {newLine}
                 </p>
               )
