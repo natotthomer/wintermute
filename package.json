@@ -4,7 +4,7 @@
   "description": "A browser client for WNTRMUTE",
   "main": "webpack.config.js",
   "scripts": {
-    "webpack-watch": "rm -rf src/dist/ && webpack -d --watch",
+    "webpack-watch": "rm -rf public/dist/ && webpack -d --watch",
     "start-watch": "nodemon server",
     "dev": "concurrent --kill-others \"npm run webpack-watch\"",
     "test": "echo \"Error: no test specified\" && exit 1",
