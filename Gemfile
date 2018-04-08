@@ -1,14 +1,12 @@
 source 'https://rubygems.org'
 
-gem "activerecord"
 gem 'bcrypt', '~> 3.1'
 gem 'pg'
+gem 'pry'
 gem 'rack-proxy'
+gem 'sequel'
 gem 'sinatra'
-gem "sinatra-activerecord"
 gem 'sinatra-contrib'
-gem 'sinatra-flash'
-gem 'sinatra-redirect-with-flash'
 
 group :development do
   gem "tux"
