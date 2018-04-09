@@ -17,6 +17,7 @@ export default class App extends React.Component {
     this.handlePromptChange = this.handlePromptChange.bind(this)
     this.handleWidthChange = this.handleWidthChange.bind(this)
     this.onEnterPress = this.onEnterPress.bind(this)
+    this.handleSignUp = this.handleSignUp.bind(this)
   }
 
   componentDidMount () {
@@ -70,6 +71,32 @@ export default class App extends React.Component {
     }
   }
 
+  handleSignUp (e) {
+    e.preventDefault()
+
+    const data = {
+      username: 'test_user',
+      password: 'test_pass'
+    }
+
+    fetch('/api/sign_up', {
+      body: JSON.stringify({data}), // must match 'Content-Type' header
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, same-origin, *omit
+      headers: {
+        'content-type': 'application/json'
+      },
+      method: 'POST'
+    })
+      .then(response => {
+        return response.json()
+      })
+      .then(user => {
+        console.log(user)
+      })
+      .catch(error => console.error(error))
+  }
+
   render () {
     return (
       <div className='app-container'>
@@ -88,6 +115,9 @@ export default class App extends React.Component {
                 onKeyDown={this.onEnterPress} />
               <input type='submit' onBlur={this.handleOnBlur} style={{ display: 'none' }} />
             </form>
+            <button onClick={this.handleSignUp}>
+              Sign up
+            </button>
           </div>
         </div>
       </div>

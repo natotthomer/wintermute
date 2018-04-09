@@ -11,7 +11,13 @@ Clone the repository and then
 cd wintermute
 brew update
 npm install
-npm run dev
+npm run webpack-watch
+```
+
+and in a separate terminal
+
+```
+rackup
 ```
 
 ### Prerequisites
