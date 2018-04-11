@@ -44,6 +44,7 @@
     "webpack-module-hot-accept": "^1.0.4"
   },
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "js-cookie": "^2.2.0"
   }
 }

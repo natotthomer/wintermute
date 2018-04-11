@@ -5,27 +5,58 @@ require 'sequel'
 require 'bcrypt'
 require 'pry'
 
-class Server < Sinatra::Base
 
-  enable :sessions
+class ApplicationController < Sinatra::Base
 
-  DB = Sequel.connect(
-    adapter: 'postgres',
-    host: 'localhost',
-    database: 'wintermute_dev'
-  )
+  configure do
+    set :public_folder, 'public'
+    set :views, 'app/views'
+
+    enable :sessions
+    set :session_secret, '857yu34ht5o39vn345n0v9w4856mv3094682v309'
+
+    DB = Sequel.connect(
+      adapter: 'postgres',
+      host: 'localhost',
+      database: 'wintermute_dev'
+    )
+  end
+
+  helpers do
+
+    def current_user
+      @current_user ||= User.first(name: session[:name]) if session[:name]
+    end
+
+    def logged_in?
+      !!current_user
+    end
+
+    def login(email, password)
+      user = User.first(email: email)
+      if user && user.authenticate(password)
+        session[:email] = user.email
+      else
+        "invalid something"
+      end
+    end
+
+    def logout!
+      session.clear
+    end
+
+  end
 
   require './models/user'
 
   register Sinatra::Namespace
 
   before do
-    if request.POST
-      @request_payload = request.POST
-    elsif request.body
-      body = request.body.read
-      @request_payload = body
-    end
+    p session
+    p params['name']
+    p session[:user_name]
+    p session[:user_id]
+    @user = User.first(name: params['name'] || session[:user_name] )
   end
 
   get '/' do
@@ -40,21 +71,39 @@ class Server < Sinatra::Base
 
     post '/sign_up' do
       password_salt = BCrypt::Engine.generate_salt
-      password_digest = BCrypt::Engine.hash_secret(@request_payload["password"], password_salt)
+      password_digest = BCrypt::Engine.hash_secret(params["password"], password_salt)
 
-      user = User.new(
-        name: @request_payload["username"],
-        password_digest: password_digest,
-        password_salt: password_salt
-      )
+      new_user_data = {
+        name: params["name"],
+        password_salt: password_salt,
+        password_digest: password_digest
+      }
+
+      user = User.new(new_user_data)
 
       if user.save
-        session[:username] = user[:username]
-        json user.to_api
+        session[:user_name] = user[:name]
+        session[:user_id] = user[:id]
+        json @user.to_api
       else
         'hello'
       end
     end
+
+    post '/sign_in' do
+      password_digest = BCrypt::Engine.hash_secret(params["password"], @user.password_salt)
+
+      if password_digest == @user.password_digest
+        session[:user_name] = @user[:name]
+        session[:user_id] = @user[:id]
+        json @user.to_api
+      end
+    end
+
+    # get '/protected', auth: :user do
+    #   p 'protected!!!!'
+    #   json(protected: 'hi im protected')
+    # end
   end
 
 end

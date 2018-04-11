@@ -6,4 +6,4 @@ require 'rack/protection'
 
 # use Rack::Protection
 
-run Server
+run ApplicationController

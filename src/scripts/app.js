@@ -1,6 +1,8 @@
 import React from 'react'
+import Cookies from 'js-cookie'
 
 import CliOutput from './cli-output.js'
+import fetcher from './utils/fetcher'
 
 export default class App extends React.Component {
   constructor (props) {
@@ -18,6 +20,8 @@ export default class App extends React.Component {
     this.handleWidthChange = this.handleWidthChange.bind(this)
     this.onEnterPress = this.onEnterPress.bind(this)
     this.handleSignUp = this.handleSignUp.bind(this)
+    this.handleSignIn = this.handleSignIn.bind(this)
+    this.handleProtected = this.handleProtected.bind(this)
   }
 
   componentDidMount () {
@@ -75,29 +79,52 @@ export default class App extends React.Component {
     e.preventDefault()
 
     const data = {
-      username: 'test_user',
+      name: 'blahblahlkjas',
       password: 'test_pass'
     }
 
-    fetch('/api/sign_up', {
-      body: JSON.stringify({data}), // must match 'Content-Type' header
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: 'same-origin', // include, same-origin, *omit
-      headers: {
-        'content-type': 'application/json'
-      },
-      method: 'POST'
+    fetcher('/api/sign_up', {
+      method: 'POST',
+      payload: data
     })
-      .then(response => {
-        return response.json()
-      })
+      .then(response => response.json())
       .then(user => {
         console.log(user)
       })
-      .catch(error => console.error(error))
+  }
+
+  handleSignIn (e) {
+    e.preventDefault()
+
+    const data = {
+      name: 'myman',
+      password: 'password'
+    }
+
+    fetcher('/api/sign_in', {
+      method: 'POST',
+      payload: data
+    })
+      .then(response => response.json())
+      .then(user => {
+        console.log(user)
+      })
+  }
+
+  handleProtected (e) {
+    e.preventDefault()
+
+    fetcher('/api/protected', {
+      method: 'GET'
+    })
+      .then(response => response.json())
+      .then(user => {
+        console.log(user)
+      })
   }
 
   render () {
+    console.log(Cookies.get());
     return (
       <div className='app-container'>
         <div className='cli'>
@@ -117,6 +144,12 @@ export default class App extends React.Component {
             </form>
             <button onClick={this.handleSignUp}>
               Sign up
+            </button>
+            <button onClick={this.handleSignIn}>
+              Sign in
+            </button>
+            <button onClick={this.handleProtected}>
+              Protected
             </button>
           </div>
         </div>
