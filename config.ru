@@ -1,9 +1,10 @@
 #\ -s Puma -p 3000
 
-require './server'
-require 'rack-proxy'
-require 'rack/protection'
+require_relative './config/environment'
 
-# use Rack::Protection
+use Rack::MethodOverride
+use SessionsController
+use UsersController
+use CommandsController
 
 run ApplicationController

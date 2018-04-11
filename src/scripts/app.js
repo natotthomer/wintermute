@@ -22,6 +22,7 @@ export default class App extends React.Component {
     this.handleSignUp = this.handleSignUp.bind(this)
     this.handleSignIn = this.handleSignIn.bind(this)
     this.handleProtected = this.handleProtected.bind(this)
+    this.handleLogout = this.handleLogout.bind(this)
   }
 
   componentDidMount () {
@@ -79,11 +80,11 @@ export default class App extends React.Component {
     e.preventDefault()
 
     const data = {
-      name: 'blahblahlkjas',
-      password: 'test_pass'
+      name: 'testtest',
+      password: 'testtest'
     }
 
-    fetcher('/api/sign_up', {
+    fetcher('/api/users', {
       method: 'POST',
       payload: data
     })
@@ -97,11 +98,11 @@ export default class App extends React.Component {
     e.preventDefault()
 
     const data = {
-      name: 'myman',
-      password: 'password'
+      name: 'testtest',
+      password: 'testtest'
     }
 
-    fetcher('/api/sign_in', {
+    fetcher('/api/login', {
       method: 'POST',
       payload: data
     })
@@ -117,10 +118,21 @@ export default class App extends React.Component {
     fetcher('/api/protected', {
       method: 'GET'
     })
-      .then(response => response.json())
+      .then(response => {
+        return response.json ? response.json() : response
+      })
       .then(user => {
         console.log(user)
       })
+  }
+
+  handleLogout (e) {
+    e.preventDefault()
+
+    fetcher('/api/logout', {
+      method: 'POST'
+    })
+      .then(response => response.json ? response.json() : response)
   }
 
   render () {
@@ -150,6 +162,9 @@ export default class App extends React.Component {
             </button>
             <button onClick={this.handleProtected}>
               Protected
+            </button>
+            <button onClick={this.handleLogout}>
+              Logout
             </button>
           </div>
         </div>

@@ -15,7 +15,7 @@ const fetcher = (url, options) => {
   let body = '', headers
 
   if (options.method === 'POST') {
-    body = encodePayload(options.payload)
+    body = options.payload ? encodePayload(options.payload) : ''
     headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded'
     })
