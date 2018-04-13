@@ -28,16 +28,13 @@ class SessionsController < ApplicationController
 
       if password_digest == @user.password_digest
         session[:name] = @user[:name]
-        json @user.to_api
+        json user: @user.to_api
       end
     end
 
-    post '/login' do
-      login(params[:email], params[:password])
-    end
-
     post '/logout' do
-      'to send back' 
+      p 'hi'
+      json user: {}
     end
 
   end

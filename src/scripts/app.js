@@ -133,6 +133,9 @@ export default class App extends React.Component {
       method: 'POST'
     })
       .then(response => response.json ? response.json() : response)
+      .then(user => {
+        console.log(user)
+      })
   }
 
   render () {
